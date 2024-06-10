@@ -8,8 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  constructor(private router:Router) {
-  }
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -34,9 +33,18 @@ export class LoginComponent implements OnInit {
       return alert('Either the username or password is empty!');
 
     //Continue forward
-    const isAuthenticated = await authenticateUser(user);
+    const { isAuthenticated, user: returnedUser } = await authenticateUser(
+      user
+    );
 
     if (!isAuthenticated) return alert('Invalid username or password!');
 
+    if (returnedUser) {
+      localStorage.setItem('user', JSON.stringify(returnedUser));
+
+      if (returnedUser.role === 'admin')
+        return this.router.navigate(['/', 'welcome', 'admin-dashboard']);
+      else return this.router.navigate(['/', 'welcome', 'non-admin-dashboard']);
+    }
   }
 }
