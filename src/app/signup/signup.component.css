@@ -1,0 +1,54 @@
+h1 {
+  font-weight: bold;
+}
+
+.signup-form {
+  border: 1px solid gray;
+  padding: 1em 2em;
+  min-height: 360px;
+  background: rgba(130, 127, 46, 0.665);
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  box-shadow: 4px 4px 12px gray;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #fff;
+  border-radius: 4px;
+}
+
+.signup-form > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05em;
+}
+
+.signup-form input {
+  padding: 0.75em;
+  border-radius: 4px;
+  outline: none;
+  border: none;
+}
+
+.signup-form input::placeholder {
+  color: rgba(0, 0, 0, 0.397);
+  padding: 0.5em;
+}
+
+.signup-form button {
+  padding: 0.35em 0.5em;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  color: rgb(130, 127, 46);
+  transition: all 0.3s ease-in-out;
+  font-size: 1.25rem;
+}
+.signup-form button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.redirect {
+  color: rgb(130, 127, 46);
+}
