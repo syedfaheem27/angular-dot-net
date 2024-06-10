@@ -2,6 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { authenticateUser } from '../services/auth.service';
 import { Router } from '@angular/router';
 
+interface User {
+  username: string;
+  password: string;
+  role: string;
+}
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -10,7 +16,27 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   constructor(private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    let userjson = localStorage.getItem('user');
+
+    if (!userjson) {
+      this.router.navigate(['/']);
+      return;
+    }
+
+    let user: User;
+
+    user = JSON.parse(userjson);
+
+    if (user.role === 'admin')
+      this.router.navigate(['/', 'welcome', 'admin-dashboard'], {
+        replaceUrl: true,
+      });
+    else
+      this.router.navigate(['/', 'welcome', 'non-admin-dashboard'], {
+        replaceUrl: true,
+      });
+  }
 
   isValidUser(users: { username: string; password: string }): boolean {
     const { username, password } = users;
@@ -43,8 +69,13 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('user', JSON.stringify(returnedUser));
 
       if (returnedUser.role === 'admin')
-        return this.router.navigate(['/', 'welcome', 'admin-dashboard']);
-      else return this.router.navigate(['/', 'welcome', 'non-admin-dashboard']);
+        return this.router.navigate(['/', 'welcome', 'admin-dashboard'], {
+          replaceUrl: true,
+        });
+      else
+        return this.router.navigate(['/', 'welcome', 'non-admin-dashboard'], {
+          replaceUrl: true,
+        });
     }
   }
 }

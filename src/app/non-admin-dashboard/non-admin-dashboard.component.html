@@ -1,4 +1,7 @@
-<h1>Hello {{user?.username ?? ""}}</h1>
+<div class="header">
+  <h1>Hello {{ user?.username ?? "" }}</h1>
+  <button (click)="handleLogout()">Log out</button>
+</div>
 <nav>
   <ul>
     <li>

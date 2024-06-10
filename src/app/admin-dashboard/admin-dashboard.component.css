@@ -1,6 +1,23 @@
 h1{
     text-align: center;
 }
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .header button {
+    border: none;
+    background: rgba(128, 128, 128, 0.597);
+    font-weight: bold;
+    color: #fff;
+    font-size: 1.05rem;
+    border-radius: 4px;
+    padding: 0.5em 0.75em;
+  }
+  .header button:hover {
+    cursor: pointer;
+  }
 nav{
     display: flex;
     align-items: center;
