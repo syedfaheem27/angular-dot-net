@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { data as USERS } from '../data/users';
+import { authenticateUser } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -7,8 +8,7 @@ import { data as USERS } from '../data/users';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  constructor() {
-    console.log(USERS);
+  constructor(private router:Router) {
   }
 
   ngOnInit(): void {}
@@ -17,17 +17,10 @@ export class LoginComponent implements OnInit {
     const { username, password } = users;
 
     if (username.length === 0 || password.length === 0) return false;
-
-    const obj = USERS.find((user) => user.name === username);
-
-    if (!obj) return false;
-
-    if (password !== obj.password) return false;
-
     return true;
   }
 
-  handleSubmit(e: Event) {
+  async handleSubmit(e: Event) {
     e.preventDefault();
 
     const formData = new FormData(e.target as HTMLFormElement);
@@ -37,9 +30,13 @@ export class LoginComponent implements OnInit {
       password: formData.get('password')! as string,
     };
 
-    if (!this.isValidUser(user)) alert('Invalid username or password');
+    if (!this.isValidUser(user))
+      return alert('Either the username or password is empty!');
 
     //Continue forward
-    console.log(user);
+    const isAuthenticated = await authenticateUser(user);
+
+    if (!isAuthenticated) return alert('Invalid username or password!');
+
   }
 }
