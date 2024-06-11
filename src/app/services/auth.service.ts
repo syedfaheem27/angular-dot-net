@@ -1,6 +1,6 @@
 import { User } from '../interfaces/user.interface';
 
-const getUsers = async () => {
+export const getUsers = async () => {
   const data = await fetch('http://localhost:3000/users');
   const users: User[] = await data.json();
 
@@ -30,3 +30,5 @@ export const authenticateUser = async (user: {
     user: obj,
   };
 };
+
+

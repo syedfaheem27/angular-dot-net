@@ -12,9 +12,9 @@ export class NonAdminDashboardComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    const user = sessionStorage.getItem('user');
+    const userInfoJson = sessionStorage.getItem('user');
 
-    if (user) this.user = JSON.parse(user);
+    if (userInfoJson) this.user = JSON.parse(userInfoJson);
     else this.router.navigate(['/']);
   }
 

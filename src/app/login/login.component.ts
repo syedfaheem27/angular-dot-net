@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { authenticateUser } from '../services/auth.service';
+import { authenticateUser, getUsers } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { User } from '../interfaces/user.interface';
 
@@ -19,9 +19,12 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    let user: User;
+    let user = JSON.parse(userjson) as { username: string; role: string };
 
-    user = JSON.parse(userjson);
+    if (!user) {
+      this.router.navigate(['/']);
+      return;
+    }
 
     if (user.role === 'admin')
       this.router.navigate(['/', 'welcome', 'admin-dashboard'], {
@@ -61,7 +64,13 @@ export class LoginComponent implements OnInit {
     if (!isAuthenticated) return alert('Invalid username or password!');
 
     if (returnedUser) {
-      sessionStorage.setItem('user', JSON.stringify(returnedUser));
+      sessionStorage.setItem(
+        'user',
+        JSON.stringify({
+          username: returnedUser.username,
+          role: returnedUser.role,
+        })
+      );
 
       if (returnedUser.role === 'admin')
         return this.router.navigate(['/', 'welcome', 'admin-dashboard'], {

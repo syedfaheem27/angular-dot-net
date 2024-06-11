@@ -11,12 +11,6 @@
       "password": "xyz",
       "role": "user",
       "id": "698c"
-    },
-    {
-      "id": "e665",
-      "username": "Farhan",
-      "password": "farhan",
-      "role": "user"
     }
   ]
 }
