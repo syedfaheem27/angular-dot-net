@@ -1,10 +1,7 @@
 import { User } from '../interfaces/user.interface';
 
-interface CreateUser extends User {
-  isActive: boolean;
-}
 
-export const createUser = async (user: CreateUser) => {
+export const createUser = async (user: User) => {
   await fetch('http://localhost:3000/users', {
     method: 'POST',
     headers: {

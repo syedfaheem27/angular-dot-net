@@ -31,7 +31,7 @@ ul {
   gap: 1rem;
 }
 
-li button {
+li a {
   border: none;
   background: gray;
   padding: 1em 2em;
@@ -40,6 +40,6 @@ li button {
   color: #fff;
 }
 
-li button:hover {
+li a:hover {
   cursor: pointer;
 }

@@ -12,14 +12,14 @@ export class NonAdminDashboardComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    const user = localStorage.getItem('user');
+    const user = sessionStorage.getItem('user');
 
     if (user) this.user = JSON.parse(user);
     else this.router.navigate(['/']);
   }
 
   handleLogout(): void {
-    localStorage.removeItem('user');
+    sessionStorage.removeItem('user');
     this.router.navigate(['/']);
   }
 }

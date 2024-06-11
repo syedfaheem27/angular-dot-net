@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    let userjson = localStorage.getItem('user');
+    let userjson = sessionStorage.getItem('user');
 
     if (!userjson) {
       this.router.navigate(['/']);
@@ -54,15 +54,14 @@ export class LoginComponent implements OnInit {
       return alert('Either the username or password is empty!');
 
     //Continue forward
-    const {
-      isAuthenticated,
-      user: returnedUser
-    } = await authenticateUser(user);
+    const { isAuthenticated, user: returnedUser } = await authenticateUser(
+      user
+    );
 
     if (!isAuthenticated) return alert('Invalid username or password!');
 
     if (returnedUser) {
-      localStorage.setItem('user', JSON.stringify(returnedUser));
+      sessionStorage.setItem('user', JSON.stringify(returnedUser));
 
       if (returnedUser.role === 'admin')
         return this.router.navigate(['/', 'welcome', 'admin-dashboard'], {

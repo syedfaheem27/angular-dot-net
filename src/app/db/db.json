@@ -4,22 +4,19 @@
       "username": "Faheem",
       "password": "faheem",
       "role": "admin",
-      "id": "81c5",
-      "isActive": false
+      "id": "81c5"
     },
     {
       "username": "User",
       "password": "xyz",
       "role": "user",
-      "id": "698c",
-      "isActive": false
+      "id": "698c"
     },
     {
       "id": "e665",
       "username": "Farhan",
       "password": "farhan",
-      "role": "user",
-      "isActive": false
+      "role": "user"
     }
   ]
 }
