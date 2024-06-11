@@ -14,6 +14,7 @@ import { TabCComponent } from './tabs/tab-c/tab-c.component';
 import { TabDComponent } from './tabs/tab-d/tab-d.component';
 import { TabEComponent } from './tabs/tab-e/tab-e.component';
 import { TabFComponent } from './tabs/tab-f/tab-f.component';
+import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,12 @@ import { TabFComponent } from './tabs/tab-f/tab-f.component';
     TabEComponent,
     TabFComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    NgIdleKeepaliveModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
