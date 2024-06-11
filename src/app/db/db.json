@@ -3,11 +3,19 @@
     {
       "username": "Faheem",
       "password": "faheem",
-      "role": "admin"
+      "role": "admin",
+      "id": "81c5"
     },
     {
       "username": "User",
       "password": "xyz",
+      "role": "user",
+      "id": "698c"
+    },
+    {
+      "id": "446a",
+      "username": "Farhan",
+      "password": "farhan",
       "role": "user"
     }
   ]

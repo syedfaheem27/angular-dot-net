@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
-interface User {
-  username: string;
-  password: string;
-  role: string;
-}
+import { User } from '../interfaces/user.interface';
 
 @Component({
   selector: 'app-non-admin-dashboard',

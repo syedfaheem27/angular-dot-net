@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { NonAdminDashboardComponent } from './non-admin-dashboard/non-admin-dashboard.component';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { NonAdminDashboardComponent } from './non-admin-dashboard/non-admin-dash
     LoginComponent,
     AdminDashboardComponent,
     NonAdminDashboardComponent,
+    SignupComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule],
   providers: [],

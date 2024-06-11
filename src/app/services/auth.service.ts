@@ -1,12 +1,8 @@
-interface user {
-  username: string;
-  password: string;
-  role: string;
-}
+import { User } from "../interfaces/user.interface";
 
 const getUsers = async () => {
   const data = await fetch('http://localhost:3000/users');
-  const users: user[] = await data.json();
+  const users: User[] = await data.json();
 
   return users;
 };
@@ -16,7 +12,7 @@ export const authenticateUser = async (user: {
   password: string;
 }): Promise<{
   isAuthenticated: boolean;
-  user?: user;
+  user?: User;
 }> => {
   const users = await getUsers();
 

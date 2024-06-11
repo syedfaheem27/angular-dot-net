@@ -1,8 +1,9 @@
-import {  NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { NonAdminDashboardComponent } from './non-admin-dashboard/non-admin-dashboard.component';
+import { SignupComponent } from './signup/signup.component';
 
 const routes: Routes = [
   {
@@ -14,7 +15,10 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent,
   },
-
+  {
+    path: 'signup',
+    component: SignupComponent,
+  },
   {
     path: 'welcome/admin-dashboard',
     component: AdminDashboardComponent,
