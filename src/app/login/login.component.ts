@@ -54,9 +54,10 @@ export class LoginComponent implements OnInit {
       return alert('Either the username or password is empty!');
 
     //Continue forward
-    const { isAuthenticated, user: returnedUser } = await authenticateUser(
-      user
-    );
+    const {
+      isAuthenticated,
+      user: returnedUser
+    } = await authenticateUser(user);
 
     if (!isAuthenticated) return alert('Invalid username or password!');
 

@@ -9,6 +9,7 @@ import { User } from '../interfaces/user.interface';
 })
 export class AdminDashboardComponent implements OnInit {
   user: User | null = null;
+  tab: string | undefined;
   constructor(private router: Router) {}
 
   ngOnInit(): void {

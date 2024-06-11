@@ -1,4 +1,4 @@
-import { User } from "../interfaces/user.interface";
+import { User } from '../interfaces/user.interface';
 
 const getUsers = async () => {
   const data = await fetch('http://localhost:3000/users');

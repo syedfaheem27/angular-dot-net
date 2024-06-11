@@ -58,6 +58,7 @@ export class SignupComponent implements OnInit {
       username,
       password,
       role: 'user',
+      isActive: false,
     });
 
     this.router.navigate(['/', 'login']);
