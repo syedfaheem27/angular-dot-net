@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { User, UserSession, BackendUser } from '../interfaces/user.interface';
 import { Router } from '@angular/router';
+import { User, UserSession, BackendUser } from '../interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -27,16 +27,30 @@ export class AuthService {
     });
   }
 
-  public async authenticateUser(user: User): Promise<boolean> {
+  public async authenticateUser(
+    user: User
+  ): Promise<{ isAuthenticated: boolean; message?: string }> {
     const users = await this.getUsers();
 
     const desiredUser = users.find(
       (u) => u.username === user.username && u.password === user.password
     );
 
-    if (!desiredUser) return false;
+    if (!desiredUser)
+      return {
+        isAuthenticated: false,
+        message: 'Invalid Username or Password!',
+      };
 
-    return true;
+    if (desiredUser.isLoggedIn)
+      return {
+        isAuthenticated: false,
+        message: 'The user is logged in elsewhere!',
+      };
+
+    return {
+      isAuthenticated: true,
+    };
   }
 
   public async logIn(user: User): Promise<UserSession> {
@@ -48,7 +62,6 @@ export class AuthService {
 
     let updatedUser = {
       ...desiredUser,
-      timeStamp: Date.now(),
       isLoggedIn: true,
     };
 
@@ -57,7 +70,6 @@ export class AuthService {
     return {
       username: updatedUser.username,
       role: updatedUser.role!,
-      timeStamp: updatedUser.timeStamp,
     };
   }
 
@@ -71,10 +83,7 @@ export class AuthService {
     const users = await this.getUsers();
 
     const desiredUser = users.find(
-      (u) =>
-        u.username === user.username &&
-        u.role === user.role &&
-        u.timeStamp === user.timeStamp
+      (u) => u.username === user.username && u.role === user.role
     );
 
     if (!desiredUser) return false;
@@ -82,8 +91,21 @@ export class AuthService {
     return true;
   }
 
-  public logOut(): void {
+  public async logOut(): Promise<void> {
+    const userInfo = JSON.parse(sessionStorage.getItem('user')!) as UserSession;
+    const users = await this.getUsers();
+
+    const desiredUser = users.find(
+      (u) => u.username === userInfo.username && u.role === userInfo.role
+    );
+
+    const updateUser: BackendUser = {
+      ...desiredUser!,
+      isLoggedIn: false,
+    };
+
+    await this.updateUser(updateUser);
     sessionStorage.removeItem('user');
-    this.router.navigate(['/']);
+    this.router.navigate(['/'],{replaceUrl:true});
   }
 }

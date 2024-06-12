@@ -19,16 +19,15 @@ export class TabAComponent implements OnInit {
     this.idle.setTimeout(15);
     this.idle.setInterrupts(DEFAULT_INTERRUPTSOURCES);
 
-    this.idle.onTimeout.subscribe(() => {
-      sessionStorage.removeItem('user');
-      this.router.navigate(['/'], { replaceUrl: true });
+    this.idle.onTimeout.subscribe(async () => {
+      await this.authService.logOut();
     });
   }
 
   async ngOnInit(): Promise<void> {
     if (!(await this.authService.isAuthorized()))
       return this.authService.logOut();
-    
+
     this.idle.watch();
   }
 

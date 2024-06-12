@@ -19,9 +19,8 @@ export class TabFComponent implements OnInit {
     this.idle.setTimeout(15);
     this.idle.setInterrupts(DEFAULT_INTERRUPTSOURCES);
 
-    this.idle.onTimeout.subscribe(() => {
-      sessionStorage.removeItem('user');
-      this.router.navigate(['/']);
+    this.idle.onTimeout.subscribe(async () => {
+      await this.authService.logOut();
     });
   }
 

@@ -1,20 +1,18 @@
 {
   "users": [
     {
-      "isLoggedIn": true,
+      "isLoggedIn": false,
       "username": "Faheem",
       "password": "faheem",
       "role": "admin",
-      "id": "81c5",
-      "timeStamp": 1718195141179
+      "id": "81c5"
     },
     {
-      "isLoggedIn": true,
+      "isLoggedIn": false,
       "username": "User",
       "password": "xyz",
       "role": "user",
-      "id": "698c",
-      "timeStamp": 1718185960662
+      "id": "698c"
     },
     {
       "id": "e409",

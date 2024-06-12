@@ -56,9 +56,11 @@ export class LoginComponent implements OnInit {
     if (!this.isValidUser(user))
       return alert('Either the username or password is empty!');
 
-    //Continue forward
-    if (!(await this.authService.authenticateUser(user)))
-      return alert('Invalid username or password! at auth module');
+    const { isAuthenticated, message } =
+      await this.authService.authenticateUser(user);
+
+    if (!isAuthenticated) return alert(message!);
+   
 
     const userInfo = await this.authService.logIn(user);
 
