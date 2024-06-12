@@ -26,4 +26,8 @@ export class TabAComponent implements OnInit {
   ngOnInit(): void {
     this.idle.watch();
   }
+
+  ngOnDestroy(): void {
+    this.idle.stop();
+  }
 }
