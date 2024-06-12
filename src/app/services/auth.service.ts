@@ -13,6 +13,7 @@ export const authenticateUser = async (user: {
 }): Promise<{
   isAuthenticated: boolean;
   user?: User;
+  isLoggedIn?: boolean;
 }> => {
   const users = await getUsers();
 
@@ -20,7 +21,7 @@ export const authenticateUser = async (user: {
     (u) => user.username === u.username && user.password === u.password
   );
 
-  if (!obj)
+  if (!obj || obj.isLoggedIn)
     return {
       isAuthenticated: false,
     };
@@ -30,5 +31,3 @@ export const authenticateUser = async (user: {
     user: obj,
   };
 };
-
-

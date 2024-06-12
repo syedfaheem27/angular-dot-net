@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../interfaces/user.interface';
+import { AuthService } from '../services/auth.module';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -10,17 +11,13 @@ import { User } from '../interfaces/user.interface';
 export class AdminDashboardComponent implements OnInit {
   user: User | null = null;
   tab: string | undefined;
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
-  ngOnInit(): void {
-    const userInfoJson = sessionStorage.getItem('user');
-
-    if (userInfoJson) this.user = JSON.parse(userInfoJson);
-    else this.router.navigate(['/']);
+  async ngOnInit(): Promise<void> {
+    if (!(await this.authService.isAuthorized())) this.authService.logOut();
   }
 
   handleLogout(): void {
-    sessionStorage.removeItem('user');
-    this.router.navigate(['/']);
+    this.authService.logOut();
   }
 }

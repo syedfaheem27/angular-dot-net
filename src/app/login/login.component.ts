@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { authenticateUser, getUsers } from '../services/auth.service';
 import { Router } from '@angular/router';
-import { User } from '../interfaces/user.interface';
+import { User, UserSession } from '../interfaces/user.interface';
+import { AuthService } from '../services/auth.module';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,7 @@ import { User } from '../interfaces/user.interface';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   ngOnInit(): void {
     let userjson = sessionStorage.getItem('user');
@@ -19,7 +20,7 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    let user = JSON.parse(userjson) as { username: string; role: string };
+    let user = JSON.parse(userjson) as UserSession;
 
     if (!user) {
       this.router.navigate(['/']);
@@ -36,7 +37,7 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  isValidUser(users: { username: string; password: string }): boolean {
+  isValidUser(users: User): boolean {
     const { username, password } = users;
 
     if (username.length === 0 || password.length === 0) return false;
@@ -57,29 +58,20 @@ export class LoginComponent implements OnInit {
       return alert('Either the username or password is empty!');
 
     //Continue forward
-    const { isAuthenticated, user: returnedUser } = await authenticateUser(
-      user
-    );
+    if (!(await this.authService.authenticateUser(user)))
+      return alert('Invalid username or password! at auth module');
 
-    if (!isAuthenticated) return alert('Invalid username or password!');
+    const userInfo = await this.authService.logIn(user);
 
-    if (returnedUser) {
-      sessionStorage.setItem(
-        'user',
-        JSON.stringify({
-          username: returnedUser.username,
-          role: returnedUser.role,
-        })
-      );
+    sessionStorage.setItem('user', JSON.stringify(userInfo));
 
-      if (returnedUser.role === 'admin')
-        return this.router.navigate(['/', 'welcome', 'admin-dashboard'], {
-          replaceUrl: true,
-        });
-      else
-        return this.router.navigate(['/', 'welcome', 'non-admin-dashboard'], {
-          replaceUrl: true,
-        });
-    }
+    if (userInfo.role === 'admin')
+      return this.router.navigate(['/', 'welcome', 'admin-dashboard'], {
+        replaceUrl: true,
+      });
+    else
+      return this.router.navigate(['/', 'welcome', 'non-admin-dashboard'], {
+        replaceUrl: true,
+      });
   }
 }
