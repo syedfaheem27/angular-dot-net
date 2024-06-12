@@ -6,19 +6,27 @@
       "password": "faheem",
       "role": "admin",
       "id": "81c5",
-      "timeStamp": 1718180263126
+      "timeStamp": 1718195141179
     },
     {
-      "isLoggedIn": false,
+      "isLoggedIn": true,
       "username": "User",
       "password": "xyz",
       "role": "user",
-      "id": "698c"
+      "id": "698c",
+      "timeStamp": 1718185960662
     },
     {
-      "id": "842e",
+      "id": "e409",
       "username": "Punit",
       "password": "punit",
+      "role": "user",
+      "isLoggedIn": false
+    },
+    {
+      "id": "729d",
+      "username": "Farhan",
+      "password": "farhan",
       "role": "user",
       "isLoggedIn": false
     }

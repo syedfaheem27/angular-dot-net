@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { createUser } from '../services/signup.service';
 import { Router } from '@angular/router';
+import { SignUpService } from '../services/signup.module';
 
 interface SignupUser {
   username: string;
@@ -14,7 +14,7 @@ interface SignupUser {
   styleUrls: ['./signup.component.css'],
 })
 export class SignupComponent implements OnInit {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private signUpService: SignUpService) {}
 
   ngOnInit(): void {}
 
@@ -54,11 +54,17 @@ export class SignupComponent implements OnInit {
     if (!this.isSamePwd({ password, confirmPwd }))
       return alert("Password and confirm password don't match!");
 
-    await createUser({
+    this.signUpService.createUser({
       username,
       password,
       role: 'user',
     });
+
+    // await createUser({
+    //   username,
+    //   password,
+    //   role: 'user',
+    // });
 
     this.router.navigate(['/', 'login']);
   }
