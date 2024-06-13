@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "isLoggedIn": false,
+      "isLoggedIn": true,
       "username": "Faheem",
       "password": "faheem",
       "role": "admin",

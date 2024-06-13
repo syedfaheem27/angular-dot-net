@@ -105,6 +105,7 @@ export class AuthService {
     };
 
     await this.updateUser(updateUser);
+    
     sessionStorage.removeItem('user');
     this.router.navigate(['/'],{replaceUrl:true});
   }
